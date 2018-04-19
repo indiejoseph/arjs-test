@@ -220,7 +220,9 @@
     }
   }
 
-  function takeScreenshot() {
+  function takeScreenshot(event) {
+    event.preventDefault();
+
     var w = window.open("", "");
     w.document.title = "Screenshot";
     var img = new Image();
@@ -243,6 +245,8 @@
 
       canvasToImage.saveAsJPEG(doubleImageCanvas, window.innerWidth, window.innerHeight);
     });
+
+    return false;
   }
 
 

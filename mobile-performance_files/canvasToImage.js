@@ -199,10 +199,12 @@
   		if (/bmp/.test(type)) {
   			var data = getImageData(scaleCanvas(canvas, width, height));
   			var strData = genBitmapImage(data);
-  			saveFile(makeURI(strData, downloadMime));
+  			// saveFile(makeURI(strData, downloadMime));
+        return makeURI(strData, downloadMime);
   		} else {
   			var strData = getDataURL(canvas, type, width, height);
-  			saveFile(strData.replace(type, downloadMime));
+  			// saveFile(strData.replace(type, downloadMime));
+        return strData.replace(type, downloadMime);
   		}
   	}
   };

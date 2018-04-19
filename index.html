@@ -235,9 +235,7 @@
     loadImages(sources, function(images) {
       context.drawImage(images.firstImage, 0, 0, window.innerWidth, window.innerHeight);
       context.drawImage(images.secondImage, 0, 0, window.innerWidth, window.innerHeight);
-      document.getElementById('take_screenshot').href = doubleImageCanvas.toDataURL("image/jpeg");
-
-      canvasToImage.saveAsJPEG(doubleImageCanvas, window.innerWidth, window.innerHeight);
+      document.getElementById('take_screenshot').href = canvasToImage.saveAsJPEG(doubleImageCanvas, window.innerWidth, window.innerHeight);
     });
 
     return false;

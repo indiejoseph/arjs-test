@@ -28,7 +28,7 @@
     background-color: green;
     border-radius: 120px;
     bottom: 50px;
-    left: 160px;
+    left: 120px;
     outline: 0;
     position: absolute;
     line-height: 120px;
@@ -235,7 +235,7 @@
     loadImages(sources, function(images) {
       context.drawImage(images.firstImage, 0, 0, window.innerWidth, window.innerHeight);
       context.drawImage(images.secondImage, 0, 0, window.innerWidth, window.innerHeight);
-      document.getElementById('take_screenshot').href = doubleImageCanvas.toDataURL("image/png");
+      document.getElementById('take_screenshot').href = doubleImageCanvas.toDataURL("image/jpeg");
 
       canvasToImage.saveAsJPEG(doubleImageCanvas, window.innerWidth, window.innerHeight);
     });
@@ -246,7 +246,7 @@
 
 </script>
 <canvas id='doubleImage' style="width: 100%; height: 100%; display: none"></canvas>
-<a id="take_screenshot" onclick="takeScreenshot();" target="_blank">
+<a id="take_screenshot" onclick="takeScreenshot();" target="_blank" download="ar.jpg">
   Take Photo
 </a>
 </body></html>

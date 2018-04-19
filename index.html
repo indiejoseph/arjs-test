@@ -20,17 +20,18 @@
   #take_screenshot {
     cursor: pointer;
     z-index: 999;
-    font-size: 22px;
+    font-size: 18px;
     border: none;
     color: white;
-    width: 160px;
-    height: 160px;
+    width: 120px;
+    height: 120px;
     background-color: green;
-    border-radius: 160px;
+    border-radius: 120px;
     bottom: 50px;
-    left: 120px;
+    left: 160px;
     outline: 0;
     position: absolute;
+    line-height: 120px;
   }
 </style>
 </head><body style="height: 100%; margin: 0px; overflow: hidden; font-family: Monospace;" cz-shortcut-listen="true"><script>
@@ -221,11 +222,6 @@
   }
 
   function takeScreenshot(event) {
-    event.preventDefault();
-
-    var w = window.open("", "");
-    w.document.title = "Screenshot";
-    var img = new Image();
     var secondImg = new Image();
     renderer.render(scene, camera);
     var doubleImageCanvas = document.getElementById("doubleImage");
@@ -239,9 +235,7 @@
     loadImages(sources, function(images) {
       context.drawImage(images.firstImage, 0, 0, window.innerWidth, window.innerHeight);
       context.drawImage(images.secondImage, 0, 0, window.innerWidth, window.innerHeight);
-      img.src = doubleImageCanvas.toDataURL("image/png");
-      img.style = "width: auto; max-height: 100%;";
-      w.document.body.appendChild(img);
+      document.getElementById('take_screenshot').href = doubleImageCanvas.toDataURL("image/png");
 
       canvasToImage.saveAsJPEG(doubleImageCanvas, window.innerWidth, window.innerHeight);
     });
@@ -252,7 +246,7 @@
 
 </script>
 <canvas id='doubleImage' style="width: 100%; height: 100%; display: none"></canvas>
-<button id="take_screenshot" onclick="takeScreenshot();">
+<a id="take_screenshot" onclick="takeScreenshot();">
   Take Photo
-</button>
+</a>
 </body></html>

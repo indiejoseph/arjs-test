@@ -34,6 +34,9 @@
 
   function getDataURL (canvas, type, width, height) {
   	canvas = scaleCanvas(canvas, width, height);
+    if (type == 'image/jpeg') {
+      return canvas.toDataURL(type, 0.92);
+    }
   	return canvas.toDataURL(type);
   }
 

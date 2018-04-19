@@ -17,6 +17,7 @@
     width: 100%;
     height: 100%;
     position: relative;
+    overflow: hidden;
   }
   #take_screenshot {
     cursor: pointer;
@@ -115,9 +116,9 @@
 		cameraParametersUrl: THREEx.ArToolkitContext.baseURL + 'data/camera_para.dat',
 		detectionMode: 'mono',
 		maxDetectionRate: 30,
-		canvasWidth: 80*3,
-		canvasHeight: 60*3,
-    imageSmoothingEnabled: true,
+		canvasWidth: 1024,
+		canvasHeight: 768,
+    imageSmoothingEnabled: false,
 	})
 	// initialize it
 	arToolkitContext.init(function onCompleted(){
@@ -230,21 +231,22 @@
     var secondImg = new Image();
     renderer.render(scene, camera);
     var doubleImageCanvas = document.getElementById("doubleImage");
-    doubleImageCanvas.setAttribute("width", window.innerWidth);
-    doubleImageCanvas.setAttribute("height", window.innerHeight);
+    var width = arToolkitContext.arController.videoWidth;
+    var height = arToolkitContext.arController.videoHeight;
+    doubleImageCanvas.setAttribute("width", width);
+    doubleImageCanvas.setAttribute("height", height);
     var context = doubleImageCanvas.getContext("2d");
     var sources = {
       firstImage: renderer.domElement.toDataURL("image/png"),
       secondImage: arToolkitContext.arController.canvas.toDataURL("image/png")
     };
     loadImages(sources, function(images) {
-      context.drawImage(images.firstImage, 0, 0, window.innerWidth, window.innerHeight);
-      context.drawImage(images.secondImage, 0, 0, window.innerWidth, window.innerHeight);
+      context.drawImage(images.secondImage, 0, 0, width, height);
+      context.drawImage(images.firstImage, 0, 0, width, height);
       img.src = doubleImageCanvas.toDataURL("image/png");
       img.style = "width: auto; max-height: 100%;";
       w.document.body.appendChild(img);
-      console.log(window.innerWidth, window.innerHeight);
-      canvasToImage.saveAsJPEG(doubleImageCanvas, window.innerWidth, window.innerHeight);
+      canvasToImage.saveAsJPEG(doubleImageCanvas, width, height);
     });
   }
 
